@@ -27,7 +27,6 @@ public class MapMaker {
             userId = firsTeam.get(i).getId();
             TankBody body = SiteJDBCDAL.INSTANCE.getTankBodyOfUser(userId);
             TankGun gun = SiteJDBCDAL.INSTANCE.getTankGunOfUser(userId);
-            System.out.println(body + "    " + gun);
             t = new Tank(userId, body, gun, Teams.First, i, spaces.length-1);
             spaces[i][spaces.length-1].setGameObject(t);
         }
@@ -35,7 +34,6 @@ public class MapMaker {
             userId = secondTeam.get(i).getId();
             TankBody body = SiteJDBCDAL.INSTANCE.getTankBodyOfUser(userId);
             TankGun gun = SiteJDBCDAL.INSTANCE.getTankGunOfUser(userId);
-            System.out.println(body + "    " + gun);
             t = new Tank(userId,body, gun, Teams.Second, i, 0);
             spaces[i][0].setGameObject(t);
         }

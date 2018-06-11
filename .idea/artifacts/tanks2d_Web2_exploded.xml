@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="tanks2d:Web2 exploded">
+  <artifact type="jar" name="tanks2d:Web2 exploded">
     <output-path>$PROJECT_DIR$/out/artifacts/tanks2d_Web2_exploded</output-path>
-    <root id="root" />
+    <root id="archive" name="tanks2d_Web2 exploded.jar" />
   </artifact>
 </component>

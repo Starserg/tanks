@@ -7,12 +7,12 @@ public class Bullet extends GameObject {
 	public Bullet(Tank tank, int x, int y){
 		this.tank = tank;
 		this.direction = tank.getDirection();
-		this.speed = 0.5;
+		this.speed = 0.5; //bulletSpeed
 		this.x = x;
 		this.y = y;
 		this.enabled = true;
 		this.delta = 0;
-		this.id = UUID.randomUUID();
+		this.id = tank.getId();
 	}
 
 	private Tank tank;

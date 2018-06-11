@@ -43,17 +43,9 @@ public class Tank extends GameObject {
 	    return this.team;
     }
 
-	//private int changeSpriteCounter;
-	
-
-
-	//public void setSpriteCounter(int c){
-	//	this.changeSpriteCounter = c;
-//	}
-
-	//public int getChangeSpriteCounter(){
-	//	return this.changeSpriteCounter;
-	//}
+	public void setKills(int kills) {
+		this.kills = kills;
+	}
 
 	public int getHp() {
 		return this.hp;

@@ -406,6 +406,7 @@ function initialiseGameObjects(){
                     document.querySelector('.content').appendChild(img1);
                 }
             }
+            initialiseBullets();
             updateGamePictureIntervalId = setInterval(updateGamePicture, updateGamePictureIntervalTime, roomMasterLogin);
         },
         error: function (e) {
@@ -431,7 +432,7 @@ function updateGamePicture(mLogin) {
                 var img1;
                 var top;
                 var left;
-                var height = 100 / (request[0].length + 5);
+                var height = 100 / (request[0].length + 5); //in % (5 - reserv)
                 for (i = 0; i < request.length; i++) {
                     for (j = 0; j < request[0].length; j++) {
                         if (request[i][j] == null) {
@@ -473,6 +474,7 @@ function updateGamePicture(mLogin) {
                     }
                 }
             }
+            drawBullets(height);
         },
         error: function (e) {
             console.log(e);
@@ -580,4 +582,93 @@ function endGame() {
     clearInterval(updateGamePictureIntervalId);
     alert("Игра окончена");
     window.location.reload();
+}
+
+function initialiseBullets() {
+    $.ajax({
+        url: "/getTanksId",
+        data: {masterLogin: roomMasterLogin},
+        method: "POST",
+        success: function (request) {
+            var img1;
+            for (i = 0; i < request.length; i++) {
+                if (request[i] == null) {
+                    continue;
+                }
+                img1 = document.createElement("IMG");
+                img1.src = "../images/gameSprites/bullet2.png";
+                img1.style.zIndex = 15;
+                img1.style.position = "absolute";
+                img1.setAttribute("id", "bullet" + request[i]);
+                img1.setAttribute("class", "bullet");
+                document.querySelector('.content').appendChild(img1);
+            }
+        }
+        ,
+        error: function (e) {
+            console.log(e);
+        }
+    });
+}
+
+function drawBullets(height) {
+    $.ajax({
+        url: "/getBullets",
+        data: {masterLogin: roomMasterLogin},
+        method: "POST",
+        success: function (request) {
+            var divsToHide = document.getElementsByClassName("bullet");
+            for (var i = 0; i < divsToHide.length; i++) {
+                divsToHide[i].style.display = "none";
+            }
+            if(request != null) {
+                var img1;
+                var top;
+                var left;
+                for (i = 0; i < request.length; i++) {
+
+                    if (request[i] == null) {
+                        continue;
+                    }
+                    img1 = document.querySelector("#bullet" + request[i].id);
+                    img1.style.display = "block";
+                    top = request[i].y * height;
+                    left = request[i].x * height;
+                    if (request[i].direction === 1) {
+                        img1.style.transform = 'rotate(0deg)';
+                    }
+                    else if (request[i].direction === 2) {
+                        img1.style.transform = 'rotate(90deg)'; // top - 1, right - 2, down - 3, left - 4 for faster loading
+                    }
+                    else if (request[i].direction === 3) {
+                        img1.style.transform = 'rotate(180deg)';
+                    }
+                    else if (request[i].direction === 4) {
+                        img1.style.transform = 'rotate(270deg)';
+                    }
+                    if (request[i].delta > 0) {
+                        if (request[i].direction === 1) {
+                            top = top - height * request[i].delta;
+                        }
+                        else if (request[i].direction === 2) {
+                            left = left + height * request[i][j].delta; // top - 1, right - 2, down - 3, left - 4 for faster loading
+                        }
+                        else if (request[i].direction === 3) {
+                            top = top + height * request[i][j].delta;
+                        }
+                        else if (request[i].direction === 4) {
+                            left = left - height * request[i][j].delta;
+                        }
+                    }
+                    img1.style.height = height + "%";
+                    img1.style.top = top + "%";
+                    img1.style.left = left * screen.height / screen.width + "%";
+                }
+            }
+        }
+        ,
+        error: function (e) {
+            console.log(e);
+        }
+    });
 }

@@ -9,10 +9,7 @@ import ru.eagle.tanks2d.BLL.BLL;
 import ru.eagle.tanks2d.entities.GameRoom;
 import ru.eagle.tanks2d.entities.GameRoomVM;
 import ru.eagle.tanks2d.service.ContentManager;
-import ru.eagle.tanks2d.tanksEntities.Bullet;
-import ru.eagle.tanks2d.tanksEntities.GameObjectVM;
-import ru.eagle.tanks2d.tanksEntities.Map;
-import ru.eagle.tanks2d.tanksEntities.MapGrounds;
+import ru.eagle.tanks2d.tanksEntities.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -179,11 +176,33 @@ public class ServletController {
     }
 
 
-    @RequestMapping(value = "/getGameBullets", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value = "/getBullets", method = RequestMethod.POST, produces = "application/json")
     public String getBullets(@RequestParam String masterLogin) {
+        try{
+            GameRoom room = BLL.INSTANCE.getGameRoomByMasterLogin(masterLogin);
+            Map map = room.getGameLogic().getGameMap();
+            List<Bullet> bullets = map.getBullets();
+            if(bullets.size() == 0){
+                return new Gson().toJson(null);
+            }
+            return new Gson().toJson(bullets);
+        }
+        catch (Exception e){
+            return new Gson().toJson(null);
+        }
+    }
+
+    @RequestMapping(value = "/getTanksId", method = RequestMethod.POST, produces = "application/json")
+    public String getTanksId(@RequestParam String masterLogin) {
         GameRoom room = BLL.INSTANCE.getGameRoomByMasterLogin(masterLogin);
         Map map = room.getGameLogic().getGameMap();
-        List<Bullet> bullets = map.getBullets();
-        return new Gson().toJson(bullets);
+        List<Tank> tanks = map.getTanks();
+        List<String> answer = new ArrayList();
+        for (Tank item: tanks) {
+            answer.add(item.getId().toString());
+        }
+
+        return new Gson().toJson(answer);
     }
+
 }

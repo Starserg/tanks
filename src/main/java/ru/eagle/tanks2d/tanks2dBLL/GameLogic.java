@@ -65,7 +65,8 @@ public class GameLogic extends AbstractBLL {
                     ((Tank)object).setHp(((Tank)object).getTempHp() - bullet.getTank().getDamage());
                     if(((Tank)object).getTempHp() <= 0){
                         bullet.getTank().setSummOfDamage(bullet.getTank().getSummOfDamage() + bullet.getTank().getDamage() + ((Tank)object).getTempHp());
-                        killTank((Tank)object);
+						bullet.getTank().setKills(bullet.getTank().getKills()+1);
+						killTank((Tank)object);
                     }
                     else{
                         bullet.getTank().setSummOfDamage(bullet.getTank().getSummOfDamage() + bullet.getTank().getDamage());
