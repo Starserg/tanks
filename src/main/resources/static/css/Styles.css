@@ -1,0 +1,366 @@
+*{
+	text-decoration: none;
+	margin:0;
+	padding: 0;
+}
+body {
+background: url('../images/fon.jpg') no-repeat center center fixed;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+ background-size: cover;
+}
+
+input, textarea {outline:none;}
+input:active, textarea:active {outline:none;}
+
+.menu:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+.menu { display: inline-block; }
+/* start commented backslash hack \*/
+* html .menu { height: 1%; }
+.menu { display: block; }
+
+
+.header {
+background:black;
+width:100%;
+height:30px;
+}
+
+.menu{
+background:rgba(50, 50, 50, 0.85);
+width:100%;
+height:75px;
+}
+
+
+.content{
+background:rgba(120, 120, 120, 0.5);
+width:100%;
+position: fixed;
+height:100%;
+}
+.eagle{
+padding-left:8%;
+}
+#name{
+width:20%;
+height:75px;	
+padding-left:0%;
+display:flex;
+align-items: center;
+justify-content: center;
+min-width:100px;
+float: left;
+}
+
+#main{
+width:13%;
+}
+
+#gameroom{
+width:13%;
+}
+
+#personalaccount{
+width:17%;
+}
+
+#leftimage{
+	margin-right: 40px;
+}
+
+#progress{
+width:14%;
+}
+
+#top{
+width:10%;	
+}
+
+#authorization{
+width:12%;
+}
+
+.contentfieldmainpage{
+	background:rgba(70, 70, 70, 0.8);
+	margin-top:10%;
+	margin-left:10%;
+	margin-right:10%;
+	z-index: 5;
+	
+}
+
+.imagecenter{
+	 display:flex;
+	 justify-content: center;
+	 margin-top: 20px;
+}
+
+
+
+.contentfield{
+	background:rgba(70, 70, 70, 0.8);
+	margin-top:15%;
+	margin-left:30%;
+	margin-right:30%;
+	z-index: 5;
+	border-radius: 20px; 
+}
+
+.inputlabel{
+	margin: 0 auto;
+	text-align: center;
+	color: black;
+}
+
+.inputclass{
+	margin:10px auto;
+	width:50%;
+	border-radius: 10px; 
+}
+#newpassword{
+margin:16px 4.4%;
+width:50%;
+}
+#login{
+margin:16px 1%;
+width:50%;
+}
+
+.recoverpassword{
+font-size:13px;
+margin-left: 5%;
+color:rgba(180, 230, 240, 1);
+}
+
+label {
+margin:0 5%;
+}
+
+.buttonlogin{
+margin-left: 40%;
+margin-bottom:5%;
+margin-top:3%;
+}
+
+.register{
+font-size:13px;
+margin-left:27%;
+color:#ffffff
+}
+
+.registration{
+font-size:18px;
+margin-left:35%;
+color:#eda80e;	
+}
+
+.buttonnewpassqord{
+margin-left: 40%;
+margin-bottom:3%;
+margin-top:1%;	
+}
+.newpassword{
+font-size: 20px;
+color:#eda80e;	
+margin-left:35%;
+padding-top:2%
+}
+
+
+.menuelement{
+width:16%;
+height:75px;
+text-transform:uppercase;
+text-decoration:none;
+align-items: center;
+justify-content: center;
+float: left;
+display:flex;
+}
+
+.textmenue{
+color:#9c988f;
+}
+
+.errormessage{
+	color: red;
+}
+
+
+.textmenue:hover{
+color:#eda80e;	
+}
+
+.progress{
+font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+font-size: 20px;
+color:#eda80e;	
+margin-left:43%;
+padding-top:3%
+}
+
+.contentfieldprogress{
+	background:rgba(70, 70, 70, 0.8);
+	margin-top:10%;
+	margin-left:25%;
+	margin-right:25%;
+	z-index: 5;
+	border-radius: 20px; 
+}
+
+/*для таблицы*/
+
+table {
+ font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+ font-size: 14px;
+ border-radius: 10px;
+border-spacing: 0;
+text-align: center;
+padding-bottom:30px;
+margin-left: 40px;
+}
+title {
+ font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+ font-size: 14px;
+ border-radius: 10px;
+ border-spacing: 0;
+ text-align: center;
+}
+thead tr td {
+ background: #9d710d;
+ color: white;
+ text-shadow: 0 1px 1px #2D2020;
+ padding: 10px 20px;
+}
+td {
+ border-style: solid;
+ border-width: 0 1px 1px 0;
+ border-color: white;
+}
+thead tr td:first-child, td:first-child {
+ text-align: left;
+}
+thead tr td:first-child {
+ border-top-left-radius: 10px;
+}
+thead tr td:last-child {
+ border-top-right-radius: 10px;
+ border-right: none;
+}
+tbody td {
+ padding: 10px 20px;
+ background: #797161;
+}
+tbody tr:last-child td:first-child {
+ border-radius: 0 0 0 10px;
+}
+tbody tr:last-child td:last-child {
+ border-radius: 0 0 10px 0;
+}
+tbody tr td:last-child {
+ border-right: none;
+}
+
+.hiddenteamstable{
+	display: none;
+}
+
+#backbutton{
+	display: none;
+}
+
+#startGameButton{
+	display: none;
+}
+
+/*---------------------*/
+
+/*для personalaccount*/
+.buttonexit{
+margin-left: 40%;
+margin-bottom:3%;
+margin-top:1%;
+}
+.personalaccount{
+font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+font-size: 24px;
+color:#eda80e;	
+margin-left:35%;
+padding-top:3%
+}
+.personalaccountelement{
+	font-size: 16px;
+	color:#ffffff;
+	margin-left:10%;
+	padding-top:3%	
+}
+/*---------------------*/
+.top{
+font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+font-size: 20px;
+color:#eda80e;	
+margin-left:46%;
+padding-top:3%	
+}
+
+.maildeveloper{
+margin-left:80%;
+margin-top:0.5%;
+color:#ffffff;
+}
+
+h1{
+font-size:16px;
+margin-top:0.5%;
+margin-left:2%;
+color:#ffffff;
+}
+.tanks2d{
+margin-left:5%;
+padding-top:2%
+}
+
+.contentfieldtop1{
+	margin-left:35%;
+	margin-right:35%;
+	z-index: 5;
+	border-radius: 20px;
+}
+.contentfieldtop2{
+	background:rgba(70, 70, 70, 0.8);
+	margin-top:3%;
+	margin-left:30%;
+	margin-right:30%;
+	padding-bottom:3%;
+	border-radius: 20px;
+}
+
+.buttonlogintop{
+	font-size: 18px;
+	margin-left:45%;
+}
+.search{
+	font-size: 16px;
+	border-radius: 10px;
+	margin-top:1%;
+}
+
+
+#buttonExitInMenuBack{
+    background:rgba(120, 120, 120, 0.5);
+}
+#buttonExitInMenu{
+	display: none;
+    font-size: 18px;
+    margin-left: auto;
+    margin-right: 0;
+}
