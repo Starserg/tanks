@@ -1,6 +1,7 @@
 package ru.eagle.tanks2d.jdbcDAL;
 
 
+
 import ru.eagle.tanks2d.entities.Achievement;
 import ru.eagle.tanks2d.entities.User;
 import ru.eagle.tanks2d.entities.UserStatistic;
@@ -9,6 +10,8 @@ import ru.eagle.tanks2d.tanksEntities.TankBody;
 import ru.eagle.tanks2d.tanksEntities.TankGun;
 
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
@@ -18,19 +21,16 @@ import java.util.Properties;
 import java.util.UUID;
 
 public class SiteJDBCDAL {
-
-private String baseBodyId ="44ff496c-34a1-4db9-a238-2cbd1b8f9dac";
-private String baseGunId = "1cb4f3c4-b6fc-4b46-bdb3-e954064689e8";
+    private Properties properties;
+    private String baseBodyId ="44ff496c-34a1-4db9-a238-2cbd1b8f9dac";
+    private String baseGunId = "1cb4f3c4-b6fc-4b46-bdb3-e954064689e8";
 
 
     private  SiteJDBCDAL(){
 
         this.properties = new Properties();
+        setProperties();
 
-        this.properties.setProperty("url", "jdbc:mariadb://localhost/tanks2d?useUnicode=yes&characterEncoding=UTF-8");
-        this.properties.setProperty("jdbc.driver", "org.mariadb.jdbc.Driver");
-        this.properties.setProperty("user", "root");
-        this.properties.setProperty("password", "553829");
         try {
             Class.forName(this.properties.getProperty("jdbc.driver"));
         } catch (ClassNotFoundException e) {
@@ -40,12 +40,30 @@ private String baseGunId = "1cb4f3c4-b6fc-4b46-bdb3-e954064689e8";
 
     }
 
-    private Properties properties;
+
+    private void setProperties(){
+        FileInputStream fis;
+
+        try {
+            fis = new FileInputStream("src/main/resources/db.properties");
+            properties.load(fis);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+
+
 
     public static final SiteJDBCDAL INSTANCE = new SiteJDBCDAL(); // SINGLETONE
 
     public void addUserToBase(String login, String email, String password, String activatedCode){
         UUID userId = UUID.randomUUID();
+
+
         String SqlQuery = "INSERT INTO users (email, login, hash, id, id_Of_TankBody, id_Of_TankGun, activated, activCode) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 
         try (Connection connection = DriverManager.getConnection(this.properties.getProperty("url"), this.properties)) {
@@ -71,6 +89,7 @@ private String baseGunId = "1cb4f3c4-b6fc-4b46-bdb3-e954064689e8";
     }
 
     private void addUserStatisticToBase(UUID userId){
+
         String SqlQuery = "INSERT INTO statistic (userId, battles, wins, kills, mediumDamage) VALUES (?, ?, ?, ?, ?);";
 
         try (Connection connection = DriverManager.getConnection(this.properties.getProperty("url"), this.properties)) {
@@ -186,7 +205,6 @@ private String baseGunId = "1cb4f3c4-b6fc-4b46-bdb3-e954064689e8";
 
     private List<User> getAllUsers() {
         List<User> users = null;
-
         String SqlQuery = "SELECT id, login, email, hash from users";
 
         try (Connection connection = DriverManager.getConnection(properties.getProperty("url"), properties)) {
@@ -229,7 +247,6 @@ private String baseGunId = "1cb4f3c4-b6fc-4b46-bdb3-e954064689e8";
 
     private List<UserStatistic> getAllStatistics(){
         List<UserStatistic> stats = null;
-
         String SqlQuery = "SELECT userId, battles, wins, kills, mediumDamage from statistic";
 
         try (Connection connection = DriverManager.getConnection(properties.getProperty("url"), properties)) {
@@ -291,7 +308,6 @@ private String baseGunId = "1cb4f3c4-b6fc-4b46-bdb3-e954064689e8";
 
     public List<Achievement> getAchievements(String userId){
         List<Achievement> answer = null;
-
         String SqlQuery = "SELECT id, name, description from achievements";
 
         try (Connection connection = DriverManager.getConnection(properties.getProperty("url"), properties)) {
@@ -321,7 +337,6 @@ private String baseGunId = "1cb4f3c4-b6fc-4b46-bdb3-e954064689e8";
     }
 
     private void setComplitedFlags(List<Achievement> achievements, String userId) {
-
         String SqlQuery = "SELECT userId, achId from userachs";
 
         try (Connection connection = DriverManager.getConnection(properties.getProperty("url"), properties)) {
@@ -647,7 +662,6 @@ private String baseGunId = "1cb4f3c4-b6fc-4b46-bdb3-e954064689e8";
     }
 
     private void checkAchievement(Achievement ach, UserStatistic stat) {
-
         String SqlQuery = "SELECT type, count from achievements WHERE id = ?";
 
         try (Connection connection = DriverManager.getConnection(properties.getProperty("url"), properties)) {
@@ -776,7 +790,6 @@ private String baseGunId = "1cb4f3c4-b6fc-4b46-bdb3-e954064689e8";
 
     public TankGun getTankGunOfUser(String id) {
         String gunId = getIdOfGunByUserId(id);
-
         String SqlQuery = "SELECT damage, time_To_Recharge from tankguns WHERE id = ?";
         try (Connection connection = DriverManager.getConnection(properties.getProperty("url"), properties)) {
 
